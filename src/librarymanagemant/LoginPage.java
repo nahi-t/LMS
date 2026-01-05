@@ -16,10 +16,10 @@ public class LoginPage extends javax.swing.JFrame {
 
     public LoginPage() {
         initComponents();
+        
     }
 public boolean authenticateStaff(String username, String password) {
     boolean isValid = false;
-    // We check if both username and password match a single row
     String sql = "SELECT * FROM staff WHERE username = ? AND password = ?";
 
     try (Connection conn = DatabaseConnection.getConnection();
@@ -30,7 +30,12 @@ public boolean authenticateStaff(String username, String password) {
 
         try (java.sql.ResultSet rs = pstmt.executeQuery()) {
             if (rs.next()) {
-                // If the query returns a result, the credentials are correct
+                // 1. Fill the Session
+                SessionManager.login(
+                    rs.getString("username"), 
+                    rs.getString("fullname"), 
+                    rs.getString("role")
+                );
                 isValid = true; 
             }
         }
@@ -125,27 +130,35 @@ public boolean authenticateStaff(String username, String password) {
     }// </editor-fold>//GEN-END:initComponents
 
     private void loginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_loginActionPerformed
-String user = username.getText().trim();
-    String pass = password.getText(); // Secure way to get JPasswordField text
+String user = username.getText().trim(); // Added trim() to remove accidental spaces
+    String pass = password.getText();
 
     if (user.isEmpty() || pass.isEmpty()) {
-        JOptionPane.showMessageDialog(this, "Please enter both Username and Password.");
+        JOptionPane.showMessageDialog(this, "Please enter both username and password");
         return;
     }
 
-    
-    
     if (authenticateStaff(user, pass)) {
-        JOptionPane.showMessageDialog(this, "Login Successful! Welcome " + user);
-        
-        // Open the Main Dashboard and close the Login screen
-//        MainDashboard main = new MainDashboard();
-//        main.setVisible(true);
-//        this.dispose(); 
+        // Log to console to verify what role was actually found
+        System.out.println("Login Success. Role: " + SessionManager.userRole);
+
+        if (SessionManager.userRole != null && SessionManager.userRole.equalsIgnoreCase("admin")) {
+            System.out.println("Redirecting to Admin Dashboard... '"+ SessionManager.userRole);
+            Homepage adminHome = new Homepage();
+            adminHome.setVisible(true);
+           dispose(); 
+        } 
+        else if (SessionManager.userRole != null && SessionManager.userRole.equalsIgnoreCase("staff")) {
+            Homepagestaff staffHome = new Homepagestaff();
+            staffHome.setVisible(true);
+           dispose();
+        } 
+        else {
+            JOptionPane.showMessageDialog(this, "Login successful, but role '" + SessionManager.userRole + "' is not recognized.");
+        }
     } else {
-        JOptionPane.showMessageDialog(this, "Invalid Username or Password.", "Login Failed", JOptionPane.ERROR_MESSAGE);
-        password.setText(""); // Clear password field on failure
-    }       
+        JOptionPane.showMessageDialog(this, "Invalid Username or Password", "Login Failed", JOptionPane.ERROR_MESSAGE);
+    } 
     }//GEN-LAST:event_loginActionPerformed
 
     
@@ -168,7 +181,8 @@ String user = username.getText().trim();
         //</editor-fold>
 
         /* Create and display the form */
-        java.awt.EventQueue.invokeLater(() -> new LoginPage().setVisible(true));
+        new LoginPage().setVisible(true);
+        
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

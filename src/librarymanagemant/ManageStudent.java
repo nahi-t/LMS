@@ -80,7 +80,7 @@ public void loadStudentData() {
         }
         
         // Update your RSTableMetro
-        Booktable.setModel(model);
+        StudentTable.setModel(model);
 
     } catch (SQLException e) {
         JOptionPane.showMessageDialog(this, "Error loading data: " + e.getMessage());
@@ -134,8 +134,8 @@ public void clearFields() {
         studentid = new app.bolivia.swing.JCTextField();
         jLabel8 = new javax.swing.JLabel();
         jPanel1 = new javax.swing.JPanel();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        Booktable = new rojerusan.RSTableMetro();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        StudentTable = new rojerusan.RSTableMetro();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setUndecorated(true);
@@ -259,12 +259,12 @@ public void clearFields() {
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        Booktable.setModel(new javax.swing.table.DefaultTableModel(
+        StudentTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
             new String [] {
-                "StudentId", "name", " course ", "Branch"
+                "StudentID", "name", "course", "branch"
             }
         ) {
             boolean[] canEdit = new boolean [] {
@@ -275,15 +275,14 @@ public void clearFields() {
                 return canEdit [columnIndex];
             }
         });
-        Booktable.setFuenteFilas(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
-        Booktable.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                BooktableMouseClicked(evt);
-            }
-        });
-        jScrollPane1.setViewportView(Booktable);
+        StudentTable.setColorFilasBackgound2(new java.awt.Color(255, 255, 255));
+        StudentTable.setFont(new java.awt.Font("URW Gothic", 1, 24)); // NOI18N
+        StudentTable.setFuenteFilas(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        StudentTable.setFuenteFilasSelect(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        StudentTable.setRowHeight(40);
+        jScrollPane2.setViewportView(StudentTable);
 
-        jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 100, 1020, 310));
+        jPanel1.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 100, 1020, 310));
 
         getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(580, 0, 1140, 820));
 
@@ -344,8 +343,16 @@ String id = studentid.getText().trim(); // Get ID from the JCTextField
 
     private void jLabel3MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel3MouseClicked
         // TODO add your handling code here:
-        new Homepage().setVisible(true);
-        dispose();
+      if (SessionManager.userRole != null && SessionManager.userRole.equalsIgnoreCase("Admin")) {
+            Homepage adminHome = new Homepage();
+            adminHome.setVisible(true);
+           dispose(); 
+        } 
+        else if (SessionManager.userRole != null && SessionManager.userRole.equalsIgnoreCase("Staff")) {
+            Homepagestaff staffHome = new Homepagestaff();
+            staffHome.setVisible(true);
+           dispose();
+        } 
     }//GEN-LAST:event_jLabel3MouseClicked
 
     private void login2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_login2ActionPerformed
@@ -366,24 +373,6 @@ String id = studentid.getText().trim(); // Get ID from the JCTextField
     private void studcourseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_studcourseActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_studcourseActionPerformed
-
-    private void BooktableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_BooktableMouseClicked
-
-                                       
-    int rowNo = Booktable.getSelectedRow();
-    TableModel model = Booktable.getModel();
-
-    // Index 0 = ID, Index 1 = Name, Index 2 = Course, Index 3 = Branch
-    studentid.setText(model.getValueAt(rowNo, 0).toString());
-    studname.setText(model.getValueAt(rowNo, 1).toString());
-    studcourse.setText(model.getValueAt(rowNo, 2).toString());
-    studbranch.setText(model.getValueAt(rowNo, 3).toString());
-
-
-                                          
-    
-
-    }//GEN-LAST:event_BooktableMouseClicked
 
     private void studnameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_studnameActionPerformed
         // TODO add your handling code here:
@@ -419,11 +408,11 @@ String id = studentid.getText().trim(); // Get ID from the JCTextField
         //</editor-fold>
 
         /* Create and display the form */
-        java.awt.EventQueue.invokeLater(() -> new ManageStudent().setVisible(true));
+       new LoginPage().setVisible(true);
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private rojerusan.RSTableMetro Booktable;
+    private rojerusan.RSTableMetro StudentTable;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel3;
@@ -433,7 +422,7 @@ String id = studentid.getText().trim(); // Get ID from the JCTextField
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
-    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
     private rojerusan.RSMaterialButtonCircle login;
     private rojerusan.RSMaterialButtonCircle login1;
     private rojerusan.RSMaterialButtonCircle login2;

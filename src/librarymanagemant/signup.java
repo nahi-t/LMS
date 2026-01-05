@@ -21,11 +21,11 @@ public class signup extends javax.swing.JFrame {
 
 
 
-    // Replace with your actual database URL, username, and password
+  
  
 
-    public void addStaff(String username, String email, String plainPassword, String fullname, String contact) {
-        String sql = "INSERT INTO staff (username, email, password, fullname, contact) VALUES (?, ?, ?, ?, ?)";
+    public void addStaff(String username, String email, String plainPassword, String fullname, String contact,String role) {
+        String sql = "INSERT INTO staff (username, email, password, fullname, contact,role) VALUES (?, ?, ?, ?, ?,?)";
 
         try (Connection conn = DatabaseConnection.getConnection();
              PreparedStatement pstmt = conn.prepareStatement(sql)) {
@@ -36,6 +36,7 @@ public class signup extends javax.swing.JFrame {
             pstmt.setString(3, plainPassword); // Reminder: Hash this in production!
             pstmt.setString(4, fullname);
             pstmt.setString(5, contact);
+              pstmt.setString(6, role);
 
             int rowsInserted = pstmt.executeUpdate();
             if (rowsInserted > 0) {
@@ -90,8 +91,8 @@ public String[] getStaffDetails(String username) {
     }
     return details; // Returns null if no user is found
 }
-public void updateStaff(String username, String email, String fullname, String contact,String Password) {
-    String sql = "UPDATE staff SET email = ?, fullname = ?, contact = ? ,password=? WHERE username = ?";
+public void updateStaff(String username, String email, String fullname, String contact,String Password,String role) {
+    String sql = "UPDATE staff SET email = ?, fullname = ?, contact = ?,password=?,role=?  WHERE username = ?";
 
     try (Connection conn = DatabaseConnection.getConnection();
          PreparedStatement pstmt = conn.prepareStatement(sql)) {
@@ -100,6 +101,7 @@ public void updateStaff(String username, String email, String fullname, String c
         pstmt.setString(2, fullname);
         pstmt.setString(3, contact);
          pstmt.setString(4, Password);
+          pstmt.setString(5, role);
         
         pstmt.setString(5, username); // The WHERE clause
 
@@ -142,6 +144,7 @@ public boolean deleteStaff(String username) {
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
+        jLabel9 = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
@@ -161,6 +164,7 @@ public boolean deleteStaff(String username) {
         search = new rojerusan.RSMaterialButtonCircle();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setUndecorated(true);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
@@ -173,7 +177,27 @@ public boolean deleteStaff(String username) {
         jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 10, 220, 70));
 
         jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/librarymanagemant/icons/signup-library-icon.png"))); // NOI18N
-        jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 60, 900, 710));
+        jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 90, 900, 710));
+
+        jLabel9.setFont(new java.awt.Font("Liberation Sans", 0, 36)); // NOI18N
+        jLabel9.setForeground(new java.awt.Color(102, 102, 102));
+        jLabel9.setIcon(new javax.swing.ImageIcon(getClass().getResource("/librarymanagemant/AddNewBookIcons/icons8_Rewind_48px.png"))); // NOI18N
+        jLabel9.setText("Back");
+        jLabel9.addAncestorListener(new javax.swing.event.AncestorListener() {
+            public void ancestorAdded(javax.swing.event.AncestorEvent evt) {
+                jLabel9AncestorAdded(evt);
+            }
+            public void ancestorMoved(javax.swing.event.AncestorEvent evt) {
+            }
+            public void ancestorRemoved(javax.swing.event.AncestorEvent evt) {
+            }
+        });
+        jLabel9.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLabel9MouseClicked(evt);
+            }
+        });
+        jPanel1.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
 
         getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 900, 830));
 
@@ -277,7 +301,7 @@ public boolean deleteStaff(String username) {
 
         getContentPane().add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(900, 0, 620, 830));
 
-        setSize(new java.awt.Dimension(1523, 865));
+        setSize(new java.awt.Dimension(1523, 828));
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
@@ -324,8 +348,10 @@ public boolean deleteStaff(String username) {
         String pass = password.getText();
         String name = fullname.getText();
         String phone = contact.getText();
+         String role1 = role.getSelectedItem().toString();
         
-       addStaff(user, mail, pass, name, phone);
+        
+       addStaff(user, mail, pass, name, phone,role1);
         JOptionPane.showMessageDialog(this, "Staff added successfully!");
          clearFields();
     }
@@ -338,9 +364,10 @@ public boolean deleteStaff(String username) {
     String name = fullname.getText();
     String phone = contact.getText();
     String Password = password.getText();
+    String role1 = role.getSelectedItem().toString();
 
     // Call the update function we built previously
-    updateStaff(user, mail, name, phone,Password);
+    updateStaff(user, mail, name, phone,Password,role1);
     
     JOptionPane.showMessageDialog(this, "Staff updated successfully!");
     
@@ -381,6 +408,24 @@ private void clearFields() {
     }
     }//GEN-LAST:event_searchActionPerformed
 
+    private void jLabel9AncestorAdded(javax.swing.event.AncestorEvent evt) {//GEN-FIRST:event_jLabel9AncestorAdded
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jLabel9AncestorAdded
+
+    private void jLabel9MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel9MouseClicked
+        // TODO add your handling code here:
+       if (SessionManager.userRole != null && SessionManager.userRole.equalsIgnoreCase("Admin")) {
+            Homepage adminHome = new Homepage();
+            adminHome.setVisible(true);
+           dispose(); 
+        } 
+        else if (SessionManager.userRole != null && SessionManager.userRole.equalsIgnoreCase("Staff")) {
+            Homepagestaff staffHome = new Homepagestaff();
+            staffHome.setVisible(true);
+           dispose();
+        } 
+    }//GEN-LAST:event_jLabel9MouseClicked
+
     /**
      * @param args the command line arguments
      */
@@ -403,7 +448,7 @@ private void clearFields() {
         //</editor-fold>
 
         /* Create and display the form */
-        java.awt.EventQueue.invokeLater(() -> new signup().setVisible(true));
+       new LoginPage().setVisible(true);
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -420,6 +465,7 @@ private void clearFields() {
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
+    private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private app.bolivia.swing.JCTextField password;

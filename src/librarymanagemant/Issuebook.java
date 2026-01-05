@@ -373,7 +373,7 @@ public boolean searchBook(int id, JTextField nameField, JTextField authorField, 
         jLabel19.setForeground(new java.awt.Color(0, 204, 0));
         jLabel19.setIcon(new javax.swing.ImageIcon(getClass().getResource("/librarymanagemant/AddNewBookIcons/icons8_Books_52px_1.png"))); // NOI18N
         jLabel19.setText("borrow book");
-        jPanel1.add(jLabel19, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 60, 190, 70));
+        jPanel1.add(jLabel19, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 60, 250, 70));
 
         rSMaterialButtonCircle1.setBackground(new java.awt.Color(204, 255, 0));
         rSMaterialButtonCircle1.setForeground(new java.awt.Color(0, 0, 0));
@@ -391,8 +391,16 @@ public boolean searchBook(int id, JTextField nameField, JTextField authorField, 
 
     private void jLabel3MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel3MouseClicked
         // TODO add your handling code here:
-        new Homepage().setVisible(true);
-        dispose();
+        if (SessionManager.userRole != null && SessionManager.userRole.equalsIgnoreCase("Admin")) {
+            Homepage adminHome = new Homepage();
+            adminHome.setVisible(true);
+           dispose(); 
+        } 
+        else if (SessionManager.userRole != null && SessionManager.userRole.equalsIgnoreCase("Staff")) {
+            Homepagestaff staffHome = new Homepagestaff();
+            staffHome.setVisible(true);
+           dispose();
+        } 
     }//GEN-LAST:event_jLabel3MouseClicked
 
     private void jPanel4MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel4MouseClicked
@@ -527,7 +535,7 @@ public boolean searchBook(int id, JTextField nameField, JTextField authorField, 
         //</editor-fold>
 
         /* Create and display the form */
-        java.awt.EventQueue.invokeLater(() -> new Issuebook().setVisible(true));
+      new LoginPage().setVisible(true);
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

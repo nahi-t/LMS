@@ -283,15 +283,14 @@ public void deleteBook(int id) {
                 return canEdit [columnIndex];
             }
         });
+        Booktable.setColorFilasBackgound2(new java.awt.Color(255, 255, 255));
+        Booktable.setFont(new java.awt.Font("Liberation Sans", 1, 24)); // NOI18N
         Booktable.setFuenteFilas(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
-        Booktable.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                BooktableMouseClicked(evt);
-            }
-        });
+        Booktable.setFuenteFilasSelect(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        Booktable.setRowHeight(40);
         jScrollPane1.setViewportView(Booktable);
 
-        jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 100, 1020, 310));
+        jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 150, 1020, 310));
 
         getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(580, 0, 1140, 820));
 
@@ -352,8 +351,16 @@ if (selectedBookId == -1) {
 
     private void jLabel3MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel3MouseClicked
         // TODO add your handling code here:
-        new Homepage().setVisible(true);
-        dispose();
+        if (SessionManager.userRole != null && SessionManager.userRole.equalsIgnoreCase("Admin")) {
+            Homepage adminHome = new Homepage();
+            adminHome.setVisible(true);
+           dispose(); 
+        } 
+        else if (SessionManager.userRole != null && SessionManager.userRole.equalsIgnoreCase("Staff")) {
+            Homepagestaff staffHome = new Homepagestaff();
+            staffHome.setVisible(true);
+           dispose();
+        } 
     }//GEN-LAST:event_jLabel3MouseClicked
 
     private void login2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_login2ActionPerformed
@@ -375,25 +382,6 @@ if (selectedBookId == -1) {
     private void bookauthorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bookauthorActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_bookauthorActionPerformed
-
-    private void BooktableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_BooktableMouseClicked
-        // TODO add your handling code here:
-                                          
-    int row = Booktable.getSelectedRow();
-    
-    // Get values from the selected row index
- selectedBookId = Integer.parseInt(Booktable.getValueAt(row, 0).toString());
-    String name = Booktable.getValueAt(row, 1).toString();
-    String author = Booktable.getValueAt(row, 2).toString();
-    String qty = Booktable.getValueAt(row, 3).toString();
-
-    // Fill your text fields
-  
-    bookname.setText(name);
-    bookauthor.setText(author);
-    bookquantity.setText(qty);
-
-    }//GEN-LAST:event_BooktableMouseClicked
 
     /**
      * @param args the command line arguments
@@ -417,7 +405,7 @@ if (selectedBookId == -1) {
         //</editor-fold>
 
         /* Create and display the form */
-        java.awt.EventQueue.invokeLater(() -> new ManageBooks().setVisible(true));
+     new LoginPage().setVisible(true);
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
