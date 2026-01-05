@@ -138,6 +138,7 @@ public void clearFields() {
         Booktable = new rojerusan.RSTableMetro();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setUndecorated(true);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jPanel3.setBackground(new java.awt.Color(102, 102, 255));
@@ -286,7 +287,7 @@ public void clearFields() {
 
         getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(580, 0, 1140, 820));
 
-        setSize(new java.awt.Dimension(1724, 854));
+        setSize(new java.awt.Dimension(1724, 817));
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
