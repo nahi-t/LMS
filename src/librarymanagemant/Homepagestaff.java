@@ -148,22 +148,16 @@ public DefaultTableModel getBookList() {
         jLabel10 = new javax.swing.JLabel();
         ms = new javax.swing.JPanel();
         jLabel11 = new javax.swing.JLabel();
-        ib = new javax.swing.JPanel();
-        jLabel12 = new javax.swing.JLabel();
-        jPanel11 = new javax.swing.JPanel();
-        jLabel13 = new javax.swing.JLabel();
-        jPanel12 = new javax.swing.JPanel();
-        jLabel14 = new javax.swing.JLabel();
         jPanel13 = new javax.swing.JPanel();
         jLabel15 = new javax.swing.JLabel();
         jPanel14 = new javax.swing.JPanel();
         jLabel16 = new javax.swing.JLabel();
-        jPanel15 = new javax.swing.JPanel();
-        jLabel17 = new javax.swing.JLabel();
         jPanel16 = new javax.swing.JPanel();
         jLabel18 = new javax.swing.JLabel();
         jPanel4 = new javax.swing.JPanel();
         jLabel6 = new javax.swing.JLabel();
+        ib = new javax.swing.JPanel();
+        jLabel12 = new javax.swing.JLabel();
         jPanel17 = new javax.swing.JPanel();
         jPanel5 = new javax.swing.JPanel();
         nobooks = new javax.swing.JLabel();
@@ -321,51 +315,7 @@ public DefaultTableModel getBookList() {
         });
         ms.add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 10, 230, 40));
 
-        jPanel2.add(ms, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 350, 340, 60));
-
-        ib.setBackground(new java.awt.Color(51, 51, 51));
-        ib.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                ibMouseClicked(evt);
-            }
-            public void mouseEntered(java.awt.event.MouseEvent evt) {
-                ibMouseEntered(evt);
-            }
-            public void mouseExited(java.awt.event.MouseEvent evt) {
-                ibMouseExited(evt);
-            }
-        });
-        ib.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
-        jLabel12.setFont(new java.awt.Font("Ubuntu Sans Mono", 1, 18)); // NOI18N
-        jLabel12.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel12.setIcon(new javax.swing.ImageIcon(getClass().getResource("/librarymanagemant/adminIcons/icons8_Sell_50px.png"))); // NOI18N
-        jLabel12.setText("Issue Book");
-        ib.add(jLabel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 10, 230, 40));
-
-        jPanel2.add(ib, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 430, 340, 60));
-
-        jPanel11.setBackground(new java.awt.Color(51, 51, 51));
-        jPanel11.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
-        jLabel13.setFont(new java.awt.Font("Ubuntu Sans Mono", 1, 18)); // NOI18N
-        jLabel13.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel13.setIcon(new javax.swing.ImageIcon(getClass().getResource("/librarymanagemant/adminIcons/icons8_Home_26px_2.png"))); // NOI18N
-        jLabel13.setText("Issue Book");
-        jPanel11.add(jLabel13, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 10, 230, 40));
-
-        jPanel2.add(jPanel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 430, 340, 60));
-
-        jPanel12.setBackground(new java.awt.Color(51, 51, 51));
-        jPanel12.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
-        jLabel14.setFont(new java.awt.Font("Ubuntu Sans Mono", 1, 18)); // NOI18N
-        jLabel14.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel14.setIcon(new javax.swing.ImageIcon(getClass().getResource("/librarymanagemant/adminIcons/icons8_Home_26px_2.png"))); // NOI18N
-        jLabel14.setText("Issue Book");
-        jPanel12.add(jLabel14, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 10, 230, 40));
-
-        jPanel2.add(jPanel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 430, 340, 60));
+        jPanel2.add(ms, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 360, 340, 60));
 
         jPanel13.setBackground(new java.awt.Color(51, 51, 51));
         jPanel13.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -387,7 +337,7 @@ public DefaultTableModel getBookList() {
         jLabel15.setText("Return Book");
         jPanel13.add(jLabel15, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 10, 230, 40));
 
-        jPanel2.add(jPanel13, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 520, 340, 60));
+        jPanel2.add(jPanel13, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 550, 340, 60));
 
         jPanel14.setBackground(new java.awt.Color(51, 51, 51));
         jPanel14.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -414,29 +364,7 @@ public DefaultTableModel getBookList() {
         });
         jPanel14.add(jLabel16, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 10, 230, 40));
 
-        jPanel2.add(jPanel14, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 600, 340, 60));
-
-        jPanel15.setBackground(new java.awt.Color(51, 51, 51));
-        jPanel15.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jPanel15MouseClicked(evt);
-            }
-            public void mouseEntered(java.awt.event.MouseEvent evt) {
-                jPanel15MouseEntered(evt);
-            }
-            public void mouseExited(java.awt.event.MouseEvent evt) {
-                jPanel15MouseExited(evt);
-            }
-        });
-        jPanel15.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
-        jLabel17.setFont(new java.awt.Font("Ubuntu Sans Mono", 1, 18)); // NOI18N
-        jLabel17.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel17.setIcon(new javax.swing.ImageIcon(getClass().getResource("/librarymanagemant/adminIcons/icons8_Books_26px.png"))); // NOI18N
-        jLabel17.setText("View Issued Book");
-        jPanel15.add(jLabel17, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 10, 230, 40));
-
-        jPanel2.add(jPanel15, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 690, 340, 60));
+        jPanel2.add(jPanel14, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 660, 340, 60));
 
         jPanel16.setBackground(new java.awt.Color(255, 0, 0));
         jPanel16.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -473,6 +401,28 @@ public DefaultTableModel getBookList() {
         jPanel4.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 10, 230, 40));
 
         jPanel2.add(jPanel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 860, 340, 60));
+
+        ib.setBackground(new java.awt.Color(51, 51, 51));
+        ib.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                ibMouseClicked(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                ibMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                ibMouseExited(evt);
+            }
+        });
+        ib.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jLabel12.setFont(new java.awt.Font("Ubuntu Sans Mono", 1, 18)); // NOI18N
+        jLabel12.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel12.setIcon(new javax.swing.ImageIcon(getClass().getResource("/librarymanagemant/adminIcons/icons8_Sell_50px.png"))); // NOI18N
+        jLabel12.setText("Issue Book");
+        ib.add(jLabel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 20, 230, 60));
+
+        jPanel2.add(ib, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 440, 330, 80));
 
         getContentPane().add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 70, 340, 1000));
 
@@ -701,24 +651,6 @@ public DefaultTableModel getBookList() {
          jPanel14.setBackground(mouseExitColor);
     }//GEN-LAST:event_jPanel14MouseExited
 
-    private void jPanel15MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel15MouseClicked
-        // TODO add your handling code here:
-        new Issuedbookdetails().setVisible(true);
-        dispose();
-                
-                
-    }//GEN-LAST:event_jPanel15MouseClicked
-
-    private void jPanel15MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel15MouseEntered
-        // TODO add your handling code here:
-         jPanel15.setBackground(mouseEnterColor);
-    }//GEN-LAST:event_jPanel15MouseEntered
-
-    private void jPanel15MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel15MouseExited
-        // TODO add your handling code here:
-           jPanel15.setBackground(mouseExitColor);
-    }//GEN-LAST:event_jPanel15MouseExited
-
     private void jPanel3MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel3MouseClicked
 
         // TODO add your handling code here:
@@ -783,11 +715,8 @@ public DefaultTableModel getBookList() {
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
-    private javax.swing.JLabel jLabel13;
-    private javax.swing.JLabel jLabel14;
     private javax.swing.JLabel jLabel15;
     private javax.swing.JLabel jLabel16;
-    private javax.swing.JLabel jLabel17;
     private javax.swing.JLabel jLabel18;
     private javax.swing.JLabel jLabel21;
     private javax.swing.JLabel jLabel23;
@@ -800,11 +729,8 @@ public DefaultTableModel getBookList() {
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JPanel jPanel11;
-    private javax.swing.JPanel jPanel12;
     private javax.swing.JPanel jPanel13;
     private javax.swing.JPanel jPanel14;
-    private javax.swing.JPanel jPanel15;
     private javax.swing.JPanel jPanel16;
     private javax.swing.JPanel jPanel17;
     private javax.swing.JPanel jPanel18;

@@ -25,17 +25,22 @@ public class defaulter extends javax.swing.JFrame {
      */
     public defaulter() {
         initComponents();
+         showDefaulterList() ;
     }
 public void showDefaulterList() {
-    DefaultTableModel model = (DefaultTableModel) Booktable.getModel();
+    DefaultTableModel model = (DefaultTableModel) Booktable1.getModel();
     model.setRowCount(0); // Clear the table
 
     // SQL Logic: Status must be 'Issued' AND return_date must be less than Today
-    String sql = "SELECT * FROM borrowed_books WHERE status = 'Issued' AND return_date < CURDATE()";
+ 
+   String sql = "SELECT * FROM borrowed_books WHERE status = 'Issued' AND return_date < CURDATE()";
 
     try (Connection conn = DatabaseConnection.getConnection();
-         PreparedStatement pst = conn.prepareStatement(sql);
-         ResultSet rs = pst.executeQuery()) {
+         PreparedStatement pst = conn.prepareStatement(sql)) {
+
+        
+
+        ResultSet rs = pst.executeQuery();
 
         while (rs.next()) {
             Object[] obj = {
@@ -48,6 +53,7 @@ public void showDefaulterList() {
             };
             model.addRow(obj);
         }
+        
         
         // Notify the user of the total count
         int count = model.getRowCount();
@@ -74,9 +80,10 @@ public void showDefaulterList() {
         Td = new javax.swing.JLabel();
         jLabel17 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        Booktable = new rojerusan.RSTableMetro();
+        Booktable1 = new rojerusan.RSTableMetro();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setUndecorated(true);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jPanel1.setBackground(new java.awt.Color(102, 102, 255));
@@ -161,7 +168,7 @@ public void showDefaulterList() {
         jLabel17.setText("Total Defaulters:");
         getContentPane().add(jLabel17, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 690, 220, 70));
 
-        Booktable.setModel(new javax.swing.table.DefaultTableModel(
+        Booktable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
@@ -177,17 +184,17 @@ public void showDefaulterList() {
                 return canEdit [columnIndex];
             }
         });
-        Booktable.setColorFilasBackgound2(new java.awt.Color(255, 255, 255));
-        Booktable.setFont(new java.awt.Font("Liberation Sans", 1, 24)); // NOI18N
-        Booktable.setFuenteFilas(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
-        Booktable.setFuenteFilasSelect(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
-        Booktable.setRowHeight(40);
-        Booktable.addMouseListener(new java.awt.event.MouseAdapter() {
+        Booktable1.setColorFilasBackgound2(new java.awt.Color(255, 255, 255));
+        Booktable1.setFont(new java.awt.Font("Liberation Sans", 1, 24)); // NOI18N
+        Booktable1.setFuenteFilas(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        Booktable1.setFuenteFilasSelect(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        Booktable1.setRowHeight(40);
+        Booktable1.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                BooktableMouseClicked(evt);
+                Booktable1MouseClicked(evt);
             }
         });
-        jScrollPane1.setViewportView(Booktable);
+        jScrollPane1.setViewportView(Booktable1);
 
         getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 340, 1020, 310));
 
@@ -212,10 +219,10 @@ public void showDefaulterList() {
         } 
     }//GEN-LAST:event_jLabel3MouseClicked
 
-    private void BooktableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_BooktableMouseClicked
+    private void Booktable1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Booktable1MouseClicked
         // TODO add your handling code here:
 
-    }//GEN-LAST:event_BooktableMouseClicked
+    }//GEN-LAST:event_Booktable1MouseClicked
 
     /**
      * @param args the command line arguments
@@ -243,7 +250,7 @@ public void showDefaulterList() {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private rojerusan.RSTableMetro Booktable;
+    private rojerusan.RSTableMetro Booktable1;
     private javax.swing.JLabel Td;
     private javax.swing.JLabel jLabel15;
     private javax.swing.JLabel jLabel17;

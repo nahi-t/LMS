@@ -12,7 +12,9 @@ import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.JOptionPane;
+import javax.swing.table.TableModel;
 public class ManageBooks extends javax.swing.JFrame {
+    
     
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(ManageBooks.class.getName());
 
@@ -276,7 +278,7 @@ public void deleteBook(int id) {
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, true, true
+                false, false, false, true
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
@@ -288,6 +290,11 @@ public void deleteBook(int id) {
         Booktable.setFuenteFilas(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         Booktable.setFuenteFilasSelect(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         Booktable.setRowHeight(40);
+        Booktable.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                BooktableMouseClicked(evt);
+            }
+        });
         jScrollPane1.setViewportView(Booktable);
 
         jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 150, 1020, 310));
@@ -382,6 +389,21 @@ if (selectedBookId == -1) {
     private void bookauthorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bookauthorActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_bookauthorActionPerformed
+
+    private void BooktableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_BooktableMouseClicked
+        // TODO add your handling code here:
+        int rowNo = Booktable.getSelectedRow();
+    TableModel model = Booktable.getModel();
+
+    // 1. Capture the ID for the Update logic
+    selectedBookId = Integer.parseInt(model.getValueAt(rowNo, 0).toString());
+
+    // 2. Display data in text fields
+    bookname.setText(model.getValueAt(rowNo, 1).toString());
+    bookauthor.setText(model.getValueAt(rowNo, 2).toString());
+    bookquantity.setText(model.getValueAt(rowNo, 3).toString());
+   
+    }//GEN-LAST:event_BooktableMouseClicked
 
     /**
      * @param args the command line arguments

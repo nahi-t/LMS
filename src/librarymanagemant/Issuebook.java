@@ -477,7 +477,7 @@ public boolean searchBook(int id, JTextField nameField, JTextField authorField, 
                 studname.setText("");
                 studcourse.setText("");
                 studbranch.setText("");
-                labales.setText("No stodent available");
+                labales.setText("No student available");
                 // Optional: Show a small warning
                 // JOptionPane.showMessageDialog(this, "Student ID not found");
             }

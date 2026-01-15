@@ -33,10 +33,7 @@ public void setBorrowDetailsToTable() {
     DefaultTableModel model = (DefaultTableModel) Booktable.getModel();
     model.setRowCount(0); // Clear existing data
 
-    String sql = "SELECT b.borrow_id, b.bookid, bk.name, b.student_id, s.name, b.borrow_date, b.return_date, b.status " +
-                 "FROM borrowed_books b " +
-                 "JOIN book bk ON b.bookid = bk.bookid " +
-                 "JOIN student s ON b.student_id = s.student_id";
+    String sql = "select * from borrowed_books";
 
     try (Connection conn = DatabaseConnection.getConnection();
          PreparedStatement pst = conn.prepareStatement(sql);
@@ -46,9 +43,8 @@ public void setBorrowDetailsToTable() {
             Object[] obj = {
                 rs.getInt("borrow_id"),
                 rs.getInt("bookid"),
-                rs.getString("bk.name"),        // Book Name
+                  
                 rs.getInt("student_id"),
-                rs.getString("s.name"),         // Student Name
                 rs.getDate("borrow_date"),
                 rs.getDate("return_date"),
                 rs.getString("status")

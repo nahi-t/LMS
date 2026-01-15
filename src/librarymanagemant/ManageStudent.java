@@ -26,6 +26,7 @@ public class ManageStudent extends javax.swing.JFrame {
           loadStudentData();
     
     }
+     int selectedStudentId = -1;
     // ADD STUDENT
 public void addstudent(String id, String name, String course, String branch) {
     String sql = "INSERT INTO student (student_id, name, course, branch) VALUES (?, ?, ?, ?)";
@@ -280,6 +281,11 @@ public void clearFields() {
         StudentTable.setFuenteFilas(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         StudentTable.setFuenteFilasSelect(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         StudentTable.setRowHeight(40);
+        StudentTable.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                StudentTableMouseClicked(evt);
+            }
+        });
         jScrollPane2.setViewportView(StudentTable);
 
         jPanel1.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 100, 1020, 310));
@@ -358,12 +364,19 @@ String id = studentid.getText().trim(); // Get ID from the JCTextField
     private void login2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_login2ActionPerformed
     // Refresh the JTable
                                       
-    String sId = studentid.getText().trim(); 
-    String sName = studname.getText().trim();
-    String sCourse = studcourse.getText().trim();
-    String sBranch = studbranch.getText().trim();
+     if (selectedStudentId  == -1) {
+        JOptionPane.showMessageDialog(this, "Please select a book from the table first!");
+        return;
+    }
 
-    updateStudent(sId, sName, sCourse, sBranch);
+    String id = studentid.getText();
+    String name = studname.getText();
+    String cours = studcourse.getText();
+    String branch = studbranch.getText();
+ 
+
+    updateStudent(id, name, cours, branch);
+ 
   loadStudentData();
 
     
@@ -385,6 +398,21 @@ String id = studentid.getText().trim(); // Get ID from the JCTextField
     private void studentidActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_studentidActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_studentidActionPerformed
+
+    private void StudentTableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_StudentTableMouseClicked
+        // TODO add your handling code here:
+        int rowNo = StudentTable.getSelectedRow();
+    TableModel model = StudentTable.getModel();
+
+    // 1. Capture the ID for the Update logic
+    selectedStudentId  = Integer.parseInt(model.getValueAt(rowNo, 0).toString());
+
+    // 2. Display data in text fields
+    studentid.setText(model.getValueAt(rowNo, 0).toString());
+    studname.setText(model.getValueAt(rowNo, 1).toString());
+    studcourse.setText(model.getValueAt(rowNo, 2).toString());
+     studbranch.setText(model.getValueAt(rowNo, 3).toString());
+    }//GEN-LAST:event_StudentTableMouseClicked
 
     /**
      * @param args the command line arguments

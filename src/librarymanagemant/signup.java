@@ -92,29 +92,30 @@ public String[] getStaffDetails(String username) {
     return details; // Returns null if no user is found
 }
 public void updateStaff(String username, String email, String fullname, String contact,String Password,String role) {
-    String sql = "UPDATE staff SET email = ?, fullname = ?, contact = ?,password=?,role=?  WHERE username = ?";
+   String sql = "UPDATE staff SET email = ?, fullname = ?, contact = ?, password = ?, role = ? WHERE username = ?";
 
-    try (Connection conn = DatabaseConnection.getConnection();
-         PreparedStatement pstmt = conn.prepareStatement(sql)) {
+try (Connection conn = DatabaseConnection.getConnection();
+     PreparedStatement pstmt = conn.prepareStatement(sql)) {
 
-        pstmt.setString(1, email);
-        pstmt.setString(2, fullname);
-        pstmt.setString(3, contact);
-         pstmt.setString(4, Password);
-          pstmt.setString(5, role);
-        
-        pstmt.setString(5, username); // The WHERE clause
+    pstmt.setString(1, email);      // email = ?
+    pstmt.setString(2, fullname);   // fullname = ?
+    pstmt.setString(3, contact);    // contact = ?
+    pstmt.setString(4, Password);   // password = ?
+    pstmt.setString(5, role);       // role = ?
+    
+    // FIX: This must be index 6 because it is the 6th '?' in the SQL string
+    pstmt.setString(6, username);   // WHERE username = ?
 
-        int rowsUpdated = pstmt.executeUpdate();
-        if (rowsUpdated > 0) {
-            System.out.println("Staff record updated successfully!");
-        } else {
-            System.out.println("No staff found with username: " + username);
-        }
-
-    } catch (SQLException e) {
-        System.err.println("Update Error: " + e.getMessage());
+    int rowsUpdated = pstmt.executeUpdate();
+    if (rowsUpdated > 0) {
+        JOptionPane.showMessageDialog(null, "Staff record updated successfully!");
+    } else {
+        System.out.println("No staff found with username: " + username);
     }
+
+} catch (SQLException e) {
+    System.err.println("Update Error: " + e.getMessage());
+}
 }
 public boolean deleteStaff(String username) {
     String sql = "DELETE FROM staff WHERE username = ?";
